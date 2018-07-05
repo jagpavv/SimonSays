@@ -1,5 +1,5 @@
-// score counting -> accumulate while tapping the buttons
-// block tapping action while sequenceToPlay is playing
+// block tapping action while correctAnswer is playing
+// time interval between next level
 
 import UIKit
 
@@ -12,30 +12,30 @@ class ViewController: UIViewController {
   @IBOutlet weak var bttomLeftBtn: UIButton!
   @IBOutlet weak var bottomRightBtn: UIButton!
 
-  var sequenceToPlay: [Int] = []
+  var correctAnswer: [Int] = []
   var currentTap: Int = 0
   var indexToPlay: Int = 0
-
+  var score: Int = 0
 
   @IBAction func startAction(_ sender: Any) {
-    sequenceToPlay = []
-    extendSequenceToPlay()
+    correctAnswer = []
+    extendcorrectAnswer()
     scoreLabel.text = "score: \(0)"
   }
 
-  func extendSequenceToPlay() {
-    sequenceToPlay.append(Int(arc4random_uniform(4)))
+  func extendcorrectAnswer() {
+    correctAnswer.append(Int(arc4random_uniform(4)))
     currentTap = 0
     playMySequence()
-    print("answer: \(sequenceToPlay)")
+    print("answer: \(correctAnswer)")
   }
 
   func playMySequence() {
-    if sequenceToPlay.count <= indexToPlay {
+    if correctAnswer.count <= indexToPlay {
       indexToPlay = 0
       return
     }
-    let index = sequenceToPlay[indexToPlay]
+    let index = correctAnswer[indexToPlay]
     animateAndMakeSound(button: button(forIndex: index), completion: { _ in
       self.indexToPlay += 1
       self.playMySequence()
@@ -43,17 +43,20 @@ class ViewController: UIViewController {
   }
 
   @IBAction func tapAction(_ sender: UIButton) {
-    if currentTap >= sequenceToPlay.count {
+    if currentTap >= correctAnswer.count {
       gameOver()
       return
     }
     let tapIndex = index(forBtn: sender)
     print("tapped: \(tapIndex)")
-    if sequenceToPlay[currentTap] == tapIndex {
+
+    if correctAnswer[currentTap] == tapIndex {
       currentTap += 1
+      score += 1
+      scoreLabel.text = "score: \(score)"
       animateAndMakeSound(button: sender, completion: { _ in
-        if self.currentTap == self.sequenceToPlay.count {
-          self.extendSequenceToPlay()
+        if self.currentTap == self.correctAnswer.count {
+          self.extendcorrectAnswer()
         }
       })
     } else {
@@ -64,8 +67,7 @@ class ViewController: UIViewController {
   func gameOver() {
     print("game over")
     playSound("game_over.wav")
-    scoreLabel.text = "score: \(sequenceToPlay.count)"
-    sequenceToPlay = []
+    correctAnswer = []
   }
 
   func animateAndMakeSound(button: UIButton, completion: ((Bool) -> Void)? = nil) {
@@ -75,7 +77,6 @@ class ViewController: UIViewController {
     }, completion: completion)
     playSound("tone\(index(forBtn: button) + 1).wav")
   }
-
 
   func index(forBtn: UIButton) -> Int {
     switch forBtn {
@@ -106,7 +107,6 @@ class ViewController: UIViewController {
       fatalError()
     }
   }
-
 }
 
 import AVFoundation
@@ -118,4 +118,3 @@ func playSound(_ nameOfAudioFile: String) {
   try! AVAudioSession.sharedInstance().setActive(true)
   audioPlayer.play()
 }
-
