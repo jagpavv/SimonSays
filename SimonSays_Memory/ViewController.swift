@@ -1,5 +1,5 @@
-// block tapping action while correctAnswer is playing
 // time interval between next level
+// add next level label
 
 import UIKit
 
@@ -19,11 +19,11 @@ class ViewController: UIViewController {
 
   @IBAction func startAction(_ sender: Any) {
     correctAnswer = []
-    extendcorrectAnswer()
+    extendCorrectAnswer()
     scoreLabel.text = "score: \(0)"
   }
 
-  func extendcorrectAnswer() {
+  func extendCorrectAnswer() {
     correctAnswer.append(Int(arc4random_uniform(4)))
     currentTap = 0
     playMySequence()
@@ -35,6 +35,9 @@ class ViewController: UIViewController {
       indexToPlay = 0
       return
     }
+    if currentTap > 0 {
+      gameOver()
+    }
     let index = correctAnswer[indexToPlay]
     animateAndMakeSound(button: button(forIndex: index), completion: { _ in
       self.indexToPlay += 1
@@ -43,6 +46,7 @@ class ViewController: UIViewController {
   }
 
   @IBAction func tapAction(_ sender: UIButton) {
+
     if currentTap >= correctAnswer.count {
       gameOver()
       return
@@ -56,13 +60,15 @@ class ViewController: UIViewController {
       scoreLabel.text = "score: \(score)"
       animateAndMakeSound(button: sender, completion: { _ in
         if self.currentTap == self.correctAnswer.count {
-          self.extendcorrectAnswer()
+          self.extendCorrectAnswer()
         }
       })
     } else {
       gameOver()
     }
   }
+
+
 
   func gameOver() {
     print("game over")
