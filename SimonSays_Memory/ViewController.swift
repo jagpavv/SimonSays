@@ -1,36 +1,40 @@
 // time interval between next level
-// add next level label
-
 import UIKit
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var levelLabel: UILabel!
   @IBOutlet weak var scoreLabel: UILabel!
 
-  @IBOutlet weak var topLeftBtn: UIButton!
-  @IBOutlet weak var topRightBtn: UIButton!
-  @IBOutlet weak var bttomLeftBtn: UIButton!
-  @IBOutlet weak var bottomRightBtn: UIButton!
+  @IBOutlet weak var topLeftBtn0: UIButton!
+  @IBOutlet weak var topRightBtn1: UIButton!
+  @IBOutlet weak var bttomLeftBtn2: UIButton!
+  @IBOutlet weak var bottomRightBtn3: UIButton!
 
   var correctAnswer: [Int] = []
   var currentTap: Int = 0
   var indexToPlay: Int = 0
+
   var score: Int = 0
+  var level: Int = 1
 
   @IBAction func startAction(_ sender: Any) {
-    correctAnswer = []
-    extendCorrectAnswer()
     scoreLabel.text = "score: \(0)"
+    levelLabel.text = "level: \(level)"
+    correctAnswer.removeAll()
+    nextLevel()
   }
 
-  func extendCorrectAnswer() {
+  func nextLevel() {
     correctAnswer.append(Int(arc4random_uniform(4)))
-    currentTap = 0
-    playMySequence()
+    levelLabel.text = "level: \(level)"
+    level += 1
     print("answer: \(correctAnswer)")
+    currentTap = 0
+    playAnswerSequence()
   }
 
-  func playMySequence() {
+  func playAnswerSequence() {
     if correctAnswer.count <= indexToPlay {
       indexToPlay = 0
       return
@@ -41,12 +45,11 @@ class ViewController: UIViewController {
     let index = correctAnswer[indexToPlay]
     animateAndMakeSound(button: button(forIndex: index), completion: { _ in
       self.indexToPlay += 1
-      self.playMySequence()
+      self.playAnswerSequence()
     })
   }
 
   @IBAction func tapAction(_ sender: UIButton) {
-
     if currentTap >= correctAnswer.count {
       gameOver()
       return
@@ -60,7 +63,7 @@ class ViewController: UIViewController {
       scoreLabel.text = "score: \(score)"
       animateAndMakeSound(button: sender, completion: { _ in
         if self.currentTap == self.correctAnswer.count {
-          self.extendCorrectAnswer()
+          self.nextLevel()
         }
       })
     } else {
@@ -68,12 +71,10 @@ class ViewController: UIViewController {
     }
   }
 
-
-
   func gameOver() {
     print("game over")
     playSound("game_over.wav")
-    correctAnswer = []
+    correctAnswer.removeAll()
   }
 
   func animateAndMakeSound(button: UIButton, completion: ((Bool) -> Void)? = nil) {
@@ -86,13 +87,13 @@ class ViewController: UIViewController {
 
   func index(forBtn: UIButton) -> Int {
     switch forBtn {
-    case topLeftBtn:
+    case topLeftBtn0:
       return 0
-    case topRightBtn:
+    case topRightBtn1:
       return 1
-    case bttomLeftBtn:
+    case bttomLeftBtn2:
       return 2
-    case bottomRightBtn:
+    case bottomRightBtn3:
       return 3
     default:
       fatalError()
@@ -102,13 +103,13 @@ class ViewController: UIViewController {
   func button(forIndex: Int) -> UIButton {
     switch forIndex {
     case 0:
-      return topLeftBtn
+      return topLeftBtn0
     case 1:
-      return topRightBtn
+      return topRightBtn1
     case 2:
-      return bttomLeftBtn
+      return bttomLeftBtn2
     case 3:
-      return bottomRightBtn
+      return bottomRightBtn3
     default:
       fatalError()
     }
