@@ -18,58 +18,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrN-JG-B3C">
-                                <rect key="frame" x="255" y="35" width="109" height="49"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="4x4-ti-TQT">
+                                <rect key="frame" x="10" y="149" width="352" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="tintColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hw-cW-JLR">
-                                <rect key="frame" x="10" y="183" width="173" height="228"/>
+                                <rect key="frame" x="10" y="182" width="173" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="0"/>
                                 <connections>
-                                    <action selector="tapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ElF-HR-JZh"/>
+                                    <action selector="btns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hNv-dG-DZK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-9U-vOG">
-                                <rect key="frame" x="191" y="183" width="173" height="228"/>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-9U-vOG">
+                                <rect key="frame" x="191" y="182" width="173" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="1"/>
                                 <connections>
-                                    <action selector="tapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eqK-gv-wCP"/>
+                                    <action selector="btns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mtz-Te-N8V"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-dI-jpr">
-                                <rect key="frame" x="10" y="419" width="173" height="228"/>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-dI-jpr">
+                                <rect key="frame" x="10" y="363" width="173" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="2"/>
                                 <connections>
-                                    <action selector="tapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tjx-af-f9T"/>
+                                    <action selector="btns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OLq-Ci-Qck"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-Le-ety">
-                                <rect key="frame" x="191" y="419" width="173" height="228"/>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-Le-ety">
+                                <rect key="frame" x="191" y="363" width="173" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
+                                <state key="normal" title="3"/>
                                 <connections>
-                                    <action selector="tapAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zlq-38-eF6"/>
+                                    <action selector="btns:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wZL-dg-JSc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-9p-EaD">
-                                <rect key="frame" x="148" y="391" width="78" height="49"/>
+                                <rect key="frame" x="148" y="335" width="78" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="START">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="startAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g0c-mQ-NKa"/>
+                                    <action selector="startBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NH0-9s-G91"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbd-Y7-xcI">
-                                <rect key="frame" x="16" y="49" width="60" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STAGE : 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbd-Y7-xcI">
+                                <rect key="frame" x="117" y="64" width="140" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -80,12 +82,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="bottomRightBtn3" destination="dT5-Le-ety" id="wKK-AT-FL2"/>
-                        <outlet property="bttomLeftBtn2" destination="Y1o-dI-jpr" id="9k1-mw-jLm"/>
-                        <outlet property="levelLabel" destination="xbd-Y7-xcI" id="hdf-ja-b17"/>
-                        <outlet property="scoreLabel" destination="qrN-JG-B3C" id="QjZ-DX-5rA"/>
-                        <outlet property="topLeftBtn0" destination="1Hw-cW-JLR" id="VRT-Q7-Prs"/>
-                        <outlet property="topRightBtn1" destination="eLF-9U-vOG" id="F57-KK-Mxa"/>
+                        <outlet property="btn0" destination="1Hw-cW-JLR" id="L4D-zg-aK6"/>
+                        <outlet property="btn1" destination="eLF-9U-vOG" id="7e4-UR-tEI"/>
+                        <outlet property="btn2" destination="Y1o-dI-jpr" id="NtA-xi-hlj"/>
+                        <outlet property="btn3" destination="dT5-Le-ety" id="8yV-Ut-obY"/>
+                        <outlet property="stageLabel" destination="xbd-Y7-xcI" id="f1F-Y4-CWH"/>
+                        <outlet property="timeProgressBar" destination="4x4-ti-TQT" id="PYW-m8-dTC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
