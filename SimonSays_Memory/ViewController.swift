@@ -4,6 +4,7 @@ import AVFoundation
 class ViewController: UIViewController {
 
   @IBOutlet weak var stageLabel: UILabel!
+  @IBOutlet weak var toastLabel: UILabel!
   @IBOutlet weak var timeProgressBar: UIProgressView!
 
   @IBOutlet weak var btn0: UIButton!
@@ -47,19 +48,41 @@ class ViewController: UIViewController {
     btn3.isEnabled = true
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       self.playSound(soundName: "upNextStage")
+      self.showToast(message: "watch and listen")
     }
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
       self.autoFlash()
     }
-    runTimer()
     print("second: \(seconds)")
   }
 
+  func showToast(message: String) {
+    toastLabel.text = message
+    toastLabel.alpha = 0
+    toastLabel.isHidden = false
+    toastLabel.layer.cornerRadius = 10
+    self.view.addSubview(toastLabel)
+    UIView.animate(withDuration: 1.2, delay: 0.0, options: .curveEaseOut, animations: {
+      self.toastLabel.alpha = 1
+    }, completion: {_ in
+//      self.toastLabel.alpha = 0
+    })
+  }
+
   func autoFlash() {
+    var finishedFlash: Bool = false {
+      didSet {
+        runTimer()
+        showToast(message: "Do it!")
+      }
+    }
+
     if correctAnswer.count <= flashed {
       flashed = 0
+      finishedFlash = true
       return
     }
+
     let IntFromArray = correctAnswer[flashed]
     flash(btn: intToBtn(from: IntFromArray), completion: { _ in
       self.playSound(soundName: "sound\(IntFromArray)")
@@ -90,7 +113,6 @@ class ViewController: UIViewController {
     }, completion: completion)
   }
 
-  // (#selector(ViewController.updateTimer))
   func runTimer() {
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(ViewController.timeLimit)), userInfo: nil, repeats: true)
   }
@@ -107,8 +129,7 @@ class ViewController: UIViewController {
 
   func endGame() {
     playSound(soundName: "gameOver")
-    // game end pop-up
-    seconds = 10
+    timer.invalidate()
 
     btn0.isEnabled = false
     btn1.isEnabled = false
@@ -122,6 +143,7 @@ class ViewController: UIViewController {
 
   // func btns connected btn0,1,2,3
   @IBAction func btns(_ sender: UIButton) {
+    toastLabel.isHidden = true
     userInput.append(sender.tag)
     flash(btn: sender)
     playSound(soundName: "sound\(sender.tag)")
