@@ -14,6 +14,7 @@
 		AC0FE80920EE49240088A20A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE80720EE49240088A20A /* LaunchScreen.storyboard */; };
 		AC0FE81420EE49240088A20A /* SimonSays_MemoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0FE81320EE49240088A20A /* SimonSays_MemoryTests.swift */; };
 		AC0FE82B20EE5ECF0088A20A /* audio in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE82A20EE5ECF0088A20A /* audio */; };
+		AC36333620FFA7D0007E4748 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC36333520FFA7D0007E4748 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		AC0FE81320EE49240088A20A /* SimonSays_MemoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimonSays_MemoryTests.swift; sourceTree = "<group>"; };
 		AC0FE81520EE49240088A20A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC0FE82A20EE5ECF0088A20A /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
+		AC36333520FFA7D0007E4748 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC36333620FFA7D0007E4748 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +67,7 @@
 				AC0FE7FD20EE49220088A20A /* SimonSays_Memory */,
 				AC0FE81220EE49240088A20A /* SimonSays_MemoryTests */,
 				AC0FE7FC20EE49220088A20A /* Products */,
+				AC36333420FFA7D0007E4748 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +101,14 @@
 				AC0FE81520EE49240088A20A /* Info.plist */,
 			);
 			path = SimonSays_MemoryTests;
+			sourceTree = "<group>";
+		};
+		AC36333420FFA7D0007E4748 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AC36333520FFA7D0007E4748 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
