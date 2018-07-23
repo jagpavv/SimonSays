@@ -29,8 +29,7 @@
                                 <color key="backgroundColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="0"/>
                                 <connections>
-                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="0R5-7n-SJ9"/>
-                                    <action selector="btnUP:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLd-BT-QxK"/>
+                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QoP-aD-wHl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-9U-vOG">
@@ -39,8 +38,7 @@
                                 <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="1"/>
                                 <connections>
-                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="Z3f-z6-YpU"/>
-                                    <action selector="btnUP:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gaf-hz-eJp"/>
+                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tRK-gM-sWp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-dI-jpr">
@@ -49,8 +47,7 @@
                                 <color key="backgroundColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="2"/>
                                 <connections>
-                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="gDM-xR-Zy4"/>
-                                    <action selector="btnUP:" destination="BYZ-38-t0r" eventType="touchUpInside" id="26k-in-4it"/>
+                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ImH-80-DAU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-Le-ety">
@@ -59,8 +56,7 @@
                                 <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="3"/>
                                 <connections>
-                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="KhD-Uq-6qT"/>
-                                    <action selector="btnUP:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PR6-HH-xOd"/>
+                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZBl-Ea-FVp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-9p-EaD">

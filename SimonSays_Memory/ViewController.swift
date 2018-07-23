@@ -27,6 +27,7 @@ class ViewController: UIViewController {
   }
 
   func nextStage() {
+    enableAllBtns(false)
     correctAnswers.append(Int(arc4random_uniform(4)))
     userInputs.removeAll()
     print("correctAnswer \(correctAnswers)")
@@ -50,8 +51,7 @@ class ViewController: UIViewController {
   }
 
   func playBtnFlashAutomatically() { //     let intFromArray = correctAnswers[flashedIdx] 이거가 맨 위로 올라오면 out of range error 출력 왜?
-    enableAllBtns(false)
-    userInputs = correctAnswers // for test
+    userInputs = correctAnswers
     if correctAnswers.count <= flashedIdx {
       flashedIdx = 0
       enableAllBtns(true)
@@ -68,10 +68,24 @@ class ViewController: UIViewController {
 
   func playBtnFlash(btn: UIButton, completion: ((Bool) -> Void)? = nil) {
     btn.alpha = 0.3
-    UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveEaseInOut, animations: {
+    UIView.animate(withDuration: 0.7, delay: 0.0, options: .curveEaseInOut, animations: {
       btn.alpha = 1
     }, completion: completion)
   }
+
+//  func playBtnFlashAutomatically() { //     let intFromArray = correctAnswers[flashedIdx] 이거가 맨 위로 올라오면 out of range error 출력 왜?
+//    userInputs = correctAnswers
+//    if correctAnswers.count <= flashedIdx {
+//      flashedIdx = 0
+//      enableAllBtns(true)
+//      return
+//    }
+//    let intFromArray = correctAnswers[flashedIdx]
+//    convertIntToBtn(from: intFromArray).flash()
+//    playSound(soundName: "sound\(intFromArray)")
+//    flashedIdx += 1
+//    playBtnFlashAutomatically()
+//  }
 
   func convertIntToBtn(from: Int) -> UIButton {
     switch from {
@@ -105,50 +119,25 @@ class ViewController: UIViewController {
   func endGame() {
     playSound(soundName: "gameOver")
     //    timer.invalidate()
-
-    enableAllBtns(false)
     correctAnswers.removeAll()
     userInputs.removeAll()
     stage = 0
     print("gameEnd")
   }
 
-  // connected btn0, 1, 2, 3
-  @IBAction func btnDown(_ sender: UIButton) {
-    sender.alpha = 0.3
+  @IBAction func tapBtn(_ sender: UIButton) {
     playSound(soundName: "sound\(sender.tag)")
-    //    userInputs.append(sender.tag)
+
     if sender.tag == userInputs.removeFirst() {
       print("userInputs \(userInputs)")
     } else {
+      endGame()
       enableAllBtns(false)
     }
     if userInputs.isEmpty {
       enableAllBtns(false)
       nextStage()
     }
-
-
-    //    if userInputs.count == correctAnswers.count {
-    //      if sender.tag == correctAnswers[userInputs.count - 1] {
-    //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-    //          self.playSound(soundName: "upNextStage")
-    //        }
-    //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-    //          self.nextStage()
-    //        }
-    //      }
-    //    } else  {
-    //      enableAllBtns(false)
-    //      endGame()
-    //    }
-
-  }
-
-  // connected btn0, 1, 2, 3
-  @IBAction func btnUP(_ sender: UIButton) {
-    sender.alpha = 1
-    enableAllBtns(true)
   }
 
   func playSound(soundName: String) {
@@ -161,5 +150,17 @@ class ViewController: UIViewController {
       print("nooooo..")
     }
     audioPlayer.play()
+  }
+}
+
+extension UIButton {
+  func flash() {
+    let flash = CABasicAnimation(keyPath: "opacity")
+    flash.duration = 0.1
+    flash.fromValue = 1
+    flash.toValue = 0.1
+    flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+
+    layer.add(flash, forKey: nil)
   }
 }
