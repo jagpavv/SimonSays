@@ -112,6 +112,10 @@ class ViewController: UIViewController {
     //    timer.invalidate()
     correctAnswers.removeAll()
     userInputs.removeAll()
+    startBtn.setTitle("\(stage)", for: .normal)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+    self.startBtn.setTitle("START", for: .normal)
+    }
     stage = 0
     print("gameEnd")
   }
