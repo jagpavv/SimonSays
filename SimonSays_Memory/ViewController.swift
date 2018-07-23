@@ -3,7 +3,7 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-  @IBOutlet weak var bestScoreLabel: UILabel!
+  @IBOutlet weak var highestStageLabel: UILabel!
 
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
@@ -17,6 +17,7 @@ class ViewController: UIViewController {
   var flashedIdx = 0
   var tappedCountIdx = 0
   var stage = 0
+  var highestStageStage = 0
 
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
   var timer = Timer()
@@ -112,10 +113,15 @@ class ViewController: UIViewController {
     //    timer.invalidate()
     correctAnswers.removeAll()
     userInputs.removeAll()
-    startBtn.setTitle("\(stage)", for: .normal)
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-    self.startBtn.setTitle("START", for: .normal)
-    }
+    let finalScore = stage - 1
+    startBtn.setTitle("\(finalScore)", for: .normal)
+
+    var highestStage = 0
+    highestStage = highestStage > finalScore ? highestStage : finalScore
+    userDefault.set(highestStage, forKey: "BestScore")
+    highestStageLabel.text = "BEST  \(highestStage)"
+    
+    highestStageStage = userDefault.integer(forKey: "BestScore")
     stage = 0
     print("gameEnd")
   }

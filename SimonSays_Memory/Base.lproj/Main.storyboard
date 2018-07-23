@@ -66,10 +66,10 @@
                                     <action selector="startBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3W2-Fi-ZZQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BEST      0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-21-cXy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BEST   0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-21-cXy">
                                 <rect key="frame" x="9" y="71" width="397" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -78,11 +78,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="bestScoreLabel" destination="TMG-21-cXy" id="064-LT-2yO"/>
                         <outlet property="btn0" destination="1Hw-cW-JLR" id="L4D-zg-aK6"/>
                         <outlet property="btn1" destination="eLF-9U-vOG" id="7e4-UR-tEI"/>
                         <outlet property="btn2" destination="Y1o-dI-jpr" id="NtA-xi-hlj"/>
                         <outlet property="btn3" destination="dT5-Le-ety" id="8yV-Ut-obY"/>
+                        <outlet property="highestStageLabel" destination="TMG-21-cXy" id="Rdi-iu-g8p"/>
                         <outlet property="startBtn" destination="WoQ-9p-EaD" id="x2I-8I-HAh"/>
                     </connections>
                 </viewController>
