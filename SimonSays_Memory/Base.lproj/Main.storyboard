@@ -24,7 +24,8 @@
                                 <color key="backgroundColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="0"/>
                                 <connections>
-                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QoP-aD-wHl"/>
+                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="L7L-Vb-O7n"/>
+                                    <action selector="btnUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QoP-aD-wHl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-9U-vOG">
@@ -33,7 +34,8 @@
                                 <color key="backgroundColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="1"/>
                                 <connections>
-                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tRK-gM-sWp"/>
+                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="WSR-7H-d6f"/>
+                                    <action selector="btnUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tRK-gM-sWp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-dI-jpr">
@@ -42,7 +44,8 @@
                                 <color key="backgroundColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="2"/>
                                 <connections>
-                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ImH-80-DAU"/>
+                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="DEO-bD-ERL"/>
+                                    <action selector="btnUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ImH-80-DAU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-Le-ety">
@@ -51,10 +54,11 @@
                                 <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
                                 <state key="normal" title="3"/>
                                 <connections>
-                                    <action selector="tapBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZBl-Ea-FVp"/>
+                                    <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="axg-L6-9pG"/>
+                                    <action selector="btnUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZBl-Ea-FVp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-9p-EaD">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-9p-EaD">
                                 <rect key="frame" x="121" y="325" width="170" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -82,7 +86,7 @@
                         <outlet property="btn1" destination="eLF-9U-vOG" id="7e4-UR-tEI"/>
                         <outlet property="btn2" destination="Y1o-dI-jpr" id="NtA-xi-hlj"/>
                         <outlet property="btn3" destination="dT5-Le-ety" id="8yV-Ut-obY"/>
-                        <outlet property="highestStageLabel" destination="TMG-21-cXy" id="Rdi-iu-g8p"/>
+                        <outlet property="highScoreLabel" destination="TMG-21-cXy" id="Rdi-iu-g8p"/>
                         <outlet property="startBtn" destination="WoQ-9p-EaD" id="x2I-8I-HAh"/>
                     </connections>
                 </viewController>
