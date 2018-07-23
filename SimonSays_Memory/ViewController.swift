@@ -3,95 +3,77 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
-  @IBOutlet weak var stageLabel: UILabel!
-  @IBOutlet weak var toastLabel: UILabel!
-  @IBOutlet weak var timeProgressBar: UIProgressView!
-
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
   @IBOutlet weak var btn2: UIButton!
   @IBOutlet weak var btn3: UIButton!
+  @IBOutlet weak var startBtn: UIButton!
 
-  var correctAnswer: [Int] = []
-  var userInput: [Int] = []
-  var flashed: Int = 0
+  var correctAnswers = [Int]()
+  var userInputs: [Int] = []
+  var flashedIdx = 0
   var stage = 0
 
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
   var timer = Timer()
-  var seconds: Float = 10
+  var remainingSeconds: Float = 10
 
-  @IBAction func startBtn(_ sender: UIButton) {
-    correctAnswer.removeAll()
-    userInput.removeAll()
-    flashed = 0
+  @IBAction func startBtnTapped(_ sender: UIButton) {
+    correctAnswers.removeAll()
+    userInputs.removeAll()
+    flashedIdx = 0
     stage = 0
-    stageLabel.text = String("STAGE \(stage)")
     nextStage()
   }
 
   func nextStage() {
-    timer.invalidate()
-    correctAnswer.append(Int(arc4random_uniform(4)))
-    print("correctAnswer \(correctAnswer)")
+    correctAnswers.append(Int(arc4random_uniform(4)))
+    userInputs.removeAll()
+    print("correctAnswer \(correctAnswers)")
 
-    userInput.removeAll()
-    flashed = 0
+    flashedIdx = 0
     stage += 1
-    stageLabel.text = String("STAGE \(stage)")
-
-    seconds = 10 + Float(stage)
-
-    btn0.isEnabled = true
-    btn1.isEnabled = true
-    btn2.isEnabled = true
-    btn3.isEnabled = true
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+    startBtn.setTitle("\(stage)", for: .normal)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       self.playSound(soundName: "upNextStage")
-      self.showToast(message: "watch and listen")
     }
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
-      self.autoFlash()
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+      self.playBtnFlashAutomatically()
     }
-    print("second: \(seconds)")
   }
 
-  func showToast(message: String) {
-    toastLabel.text = message
-    toastLabel.alpha = 0
-    toastLabel.isHidden = false
-    toastLabel.layer.cornerRadius = 10
-    self.view.addSubview(toastLabel)
-    UIView.animate(withDuration: 1.2, delay: 0.0, options: .curveEaseOut, animations: {
-      self.toastLabel.alpha = 1
-    }, completion: {_ in
-//      self.toastLabel.alpha = 0
-    })
+  func enableAllBtns(_ enabled: Bool) {
+    btn0.isEnabled = enabled
+    btn1.isEnabled = enabled
+    btn2.isEnabled = enabled
+    btn3.isEnabled = enabled
   }
 
-  func autoFlash() {
-    var finishedFlash: Bool = false {
-      didSet {
-        runTimer()
-        showToast(message: "Do it!")
-      }
-    }
-
-    if correctAnswer.count <= flashed {
-      flashed = 0
-      finishedFlash = true
+  func playBtnFlashAutomatically() { //     let intFromArray = correctAnswers[flashedIdx] 이거가 맨 위로 올라오면 out of range error 출력 왜?
+    enableAllBtns(false)
+    userInputs = correctAnswers // for test
+    if correctAnswers.count <= flashedIdx {
+      flashedIdx = 0
+      enableAllBtns(true)
       return
     }
 
-    let IntFromArray = correctAnswer[flashed]
-    flash(btn: intToBtn(from: IntFromArray), completion: { _ in
-      self.playSound(soundName: "sound\(IntFromArray)")
-      self.flashed += 1
-      self.autoFlash()
+    let intFromArray = correctAnswers[flashedIdx]
+    playBtnFlash(btn: convertIntToBtn(from: intFromArray), completion: {_ in
+      self.playSound(soundName: "sound\(intFromArray)")
+      self.flashedIdx += 1
+      self.playBtnFlashAutomatically()
     })
   }
 
-  func intToBtn(from: Int) -> UIButton {
+  func playBtnFlash(btn: UIButton, completion: ((Bool) -> Void)? = nil) {
+    btn.alpha = 0.3
+    UIView.animate(withDuration: 0.6, delay: 0.0, options: .curveEaseInOut, animations: {
+      btn.alpha = 1
+    }, completion: completion)
+  }
+
+  func convertIntToBtn(from: Int) -> UIButton {
     switch from {
     case 0:
       return btn0
@@ -106,57 +88,67 @@ class ViewController: UIViewController {
     }
   }
 
-  func flash(btn: UIButton, completion: ((Bool) -> Void)? = nil) {
-    btn.alpha = 0
-    UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseInOut, animations: {
-      btn.alpha = 1
-    }, completion: completion)
-  }
-
-  func runTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(ViewController.timeLimit)), userInfo: nil, repeats: true)
-  }
-
-  @objc func timeLimit() {
-    timeProgressBar.setProgress(Float(seconds)/100.0, animated: true)
-    if seconds != 0 {
-      seconds -= 1
-    } else {
-      timer.invalidate()
-      endGame()
-    }
-  }
+  //  func runTimer() {
+  //    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(ViewController.timeLimit)), userInfo: nil, repeats: true)
+  //  }
+  //
+  //  @objc func timeLimit() {
+  ////    timeProgressBar.setProgress(Float(remainingSeconds)/100.0, animated: true)
+  //    if remainingSeconds != 0 {
+  //      remainingSeconds -= 1
+  //    } else {
+  //      timer.invalidate()
+  //      endGame()
+  //    }
+  //  }
 
   func endGame() {
     playSound(soundName: "gameOver")
-    timer.invalidate()
+    //    timer.invalidate()
 
-    btn0.isEnabled = false
-    btn1.isEnabled = false
-    btn2.isEnabled = false
-    btn3.isEnabled = false
-    correctAnswer.removeAll()
-    userInput.removeAll()
+    enableAllBtns(false)
+    correctAnswers.removeAll()
+    userInputs.removeAll()
     stage = 0
     print("gameEnd")
   }
 
-  // func btns connected btn0,1,2,3
-  @IBAction func btns(_ sender: UIButton) {
-    toastLabel.isHidden = true
-    userInput.append(sender.tag)
-    flash(btn: sender)
+  // connected btn0, 1, 2, 3
+  @IBAction func btnDown(_ sender: UIButton) {
+    sender.alpha = 0.3
     playSound(soundName: "sound\(sender.tag)")
-
-    print("userInput: \(userInput)")
-
-    if sender.tag == correctAnswer[userInput.count - 1] {
-      if userInput.count == correctAnswer.count {
-        nextStage()
-      }
+    //    userInputs.append(sender.tag)
+    if sender.tag == userInputs.removeFirst() {
+      print("userInputs \(userInputs)")
     } else {
-      endGame()
+      enableAllBtns(false)
     }
+    if userInputs.isEmpty {
+      enableAllBtns(false)
+      nextStage()
+    }
+
+
+    //    if userInputs.count == correctAnswers.count {
+    //      if sender.tag == correctAnswers[userInputs.count - 1] {
+    //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+    //          self.playSound(soundName: "upNextStage")
+    //        }
+    //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+    //          self.nextStage()
+    //        }
+    //      }
+    //    } else  {
+    //      enableAllBtns(false)
+    //      endGame()
+    //    }
+
+  }
+
+  // connected btn0, 1, 2, 3
+  @IBAction func btnUP(_ sender: UIButton) {
+    sender.alpha = 1
+    enableAllBtns(true)
   }
 
   func playSound(soundName: String) {
