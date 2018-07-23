@@ -3,15 +3,19 @@ import AVFoundation
 
 class ViewController: UIViewController {
 
+  @IBOutlet weak var bestScoreLabel: UILabel!
+
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
   @IBOutlet weak var btn2: UIButton!
   @IBOutlet weak var btn3: UIButton!
   @IBOutlet weak var startBtn: UIButton!
 
-  var correctAnswers = [Int]()
+  var userDefault = UserDefaults.standard
+  var correctAnswers: [Int] = []
   var userInputs: [Int] = []
   var flashedIdx = 0
+  var tappedCountIdx = 0
   var stage = 0
 
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
@@ -27,9 +31,10 @@ class ViewController: UIViewController {
   }
 
   func nextStage() {
+    tappedCountIdx = 0
+    userInputs.removeAll()
     enableAllBtns(false)
     correctAnswers.append(Int(arc4random_uniform(4)))
-    userInputs.removeAll()
     print("correctAnswer \(correctAnswers)")
 
     flashedIdx = 0
@@ -50,8 +55,8 @@ class ViewController: UIViewController {
     btn3.isEnabled = enabled
   }
 
-  func playBtnFlashAutomatically() { //     let intFromArray = correctAnswers[flashedIdx] 이거가 맨 위로 올라오면 out of range error 출력 왜?
-    userInputs = correctAnswers
+  func playBtnFlashAutomatically() {
+    //    userInputs = correctAnswers
     if correctAnswers.count <= flashedIdx {
       flashedIdx = 0
       enableAllBtns(true)
@@ -72,20 +77,6 @@ class ViewController: UIViewController {
       btn.alpha = 1
     }, completion: completion)
   }
-
-//  func playBtnFlashAutomatically() { //     let intFromArray = correctAnswers[flashedIdx] 이거가 맨 위로 올라오면 out of range error 출력 왜?
-//    userInputs = correctAnswers
-//    if correctAnswers.count <= flashedIdx {
-//      flashedIdx = 0
-//      enableAllBtns(true)
-//      return
-//    }
-//    let intFromArray = correctAnswers[flashedIdx]
-//    convertIntToBtn(from: intFromArray).flash()
-//    playSound(soundName: "sound\(intFromArray)")
-//    flashedIdx += 1
-//    playBtnFlashAutomatically()
-//  }
 
   func convertIntToBtn(from: Int) -> UIButton {
     switch from {
@@ -126,17 +117,21 @@ class ViewController: UIViewController {
   }
 
   @IBAction func tapBtn(_ sender: UIButton) {
+    sender.flash()
     playSound(soundName: "sound\(sender.tag)")
+    userInputs.append(sender.tag)
+    print("userInputs: \(userInputs)")
 
-    if sender.tag == userInputs.removeFirst() {
-      print("userInputs \(userInputs)")
-    } else {
+    if sender.tag == correctAnswers[tappedCountIdx] {
+      tappedCountIdx += 1
+      if userInputs.count == correctAnswers.count {
+        tappedCountIdx = 0
+        enableAllBtns(false)
+        nextStage()
+      }
+    } else if sender.tag != correctAnswers[tappedCountIdx] {
+      tappedCountIdx = 0
       endGame()
-      enableAllBtns(false)
-    }
-    if userInputs.isEmpty {
-      enableAllBtns(false)
-      nextStage()
     }
   }
 
