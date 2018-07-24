@@ -21,7 +21,16 @@ class ViewController: UIViewController {
   var playedIdx = 0
   var inputIdx = 0
   var stage = 0
-  var highScore = 0
+  var highScore: Int {
+    get {
+      return userDefault.integer(forKey: kHighScoreKey)
+    }
+    set {
+      userDefault.set(newValue, forKey: kHighScoreKey)
+      userDefault.synchronize()
+      highScoreLabel.text = "High score: \(newValue)"
+    }
+  }
 
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 //  var timer = Timer()
@@ -29,13 +38,8 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    loadHighScore()
-    enableAllBtns(false)
-  }
-
-  func loadHighScore() {
-    highScore = userDefault.integer(forKey: kHighScoreKey)
     highScoreLabel.text = "High score: \(highScore)"
+    enableAllBtns(false)
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
@@ -149,10 +153,6 @@ class ViewController: UIViewController {
     let highestScore = finalScore > highScore ? finalScore : highScore
     highScore = highestScore
     startBtn.setTitle("\(finalScore)", for: .normal)
-
-    userDefault.set(highestScore, forKey: kHighScoreKey)
-    userDefault.synchronize()
-    loadHighScore()
 
     print("gameEnd")
   }
