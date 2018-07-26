@@ -34,7 +34,13 @@ class ViewController: UIViewController {
   }
 
   var timer = Timer()
-  var inputTimeLimit: Double = 10
+  var totalTimeLimit: Float = 0
+  var remainingTime: Float = 0 {
+    didSet {
+      let progress = remainingTime / totalTimeLimit
+      timePorgressBar.setProgress(progress, animated: true)
+    }
+  }
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 
   override func viewDidLoad() {
@@ -69,6 +75,7 @@ class ViewController: UIViewController {
       self.stage += 1
       self.startBtn.setTitle("\(self.stage)", for: .normal)
       self.playSound(soundName: "upNextStage")
+      self.resetTimer()
     }
 
     playedIdx = 0
@@ -82,12 +89,7 @@ class ViewController: UIViewController {
     guard playedIdx < correctAnswers.count else {
       playedIdx = 0
       enableAllBtns(true)
-// 여기
-//      runTimePorgressBar(seconds: 0)
-      hiddenTimePorgressBar(false)
-      UIView.animate(withDuration: 10, animations: { () -> Void in
-        self.timePorgressBar.setProgress(0.0, animated: true)
-      })
+      runTimer()
       return
     }
 
@@ -129,15 +131,6 @@ class ViewController: UIViewController {
       inputIdx += 1
       if userInputs.count == correctAnswers.count {
         nextStage()
-
-        //여기
-//        timer.invalidate()
-        hiddenTimePorgressBar(true)
-//        runTimePorgressBar(seconds: 10)
-        UIView.animate(withDuration: 0, animations: { () -> Void in
-          self.timePorgressBar.setProgress(1.0, animated: true)
-        })
-
       }
     } else {
       endGame()
@@ -149,7 +142,7 @@ class ViewController: UIViewController {
   func endGame() {
     enableAllBtns(false)
     playSound(soundName: "gameOver")
-    // timer.invalidate()
+    stopTimer()
 
     let finalScore = stage - 1
     let highestScore = finalScore > highScore ? finalScore : highScore
@@ -197,33 +190,27 @@ class ViewController: UIViewController {
     btn3.isEnabled = enabled
   }
 
-  func startCountDownInputTimeLimit() {
-    runTimer()
-    updateTime()
-    hiddenTimePorgressBar(false)
-//    runTimePorgressBar()
+  func resetTimer() {
+    timer.invalidate()
+    totalTimeLimit = Float(stage) + 3
+    remainingTime = totalTimeLimit
   }
 
   func runTimer() {
-    timer = Timer.scheduledTimer(timeInterval: inputTimeLimit, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
+    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
+  }
+
+  func stopTimer() {
+    timer.invalidate()
   }
 
   @objc func updateTime() {
-    if inputTimeLimit != 0 {
-      inputTimeLimit -= 1
-    } else {
-      timer.invalidate()
-      endGame()
+    if remainingTime > 0 {
+      remainingTime -= 1
+      if remainingTime == 0 {
+        endGame()
+      }
     }
   }
 
-  func runTimePorgressBar() {
-    UIView.animate(withDuration: 10, animations: { () -> Void in
-      self.timePorgressBar.setProgress(0.0, animated: true)
-    })
-  }
-
-  func hiddenTimePorgressBar(_ hidden: Bool) {
-    timePorgressBar.isHidden = hidden
-  }
 }
