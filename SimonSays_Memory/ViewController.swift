@@ -8,6 +8,7 @@ let kHighScoreKey = "HighScore"
 class ViewController: UIViewController {
 
   @IBOutlet weak var highScoreLabel: UILabel!
+  @IBOutlet weak var timePorgressBar: UIProgressView!
 
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
@@ -32,9 +33,9 @@ class ViewController: UIViewController {
     }
   }
 
+  var timer = Timer()
+  var inputTimeLimit: Double = 10
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
-//  var timer = Timer()
-//  var remainingSeconds: Float = 10
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -81,6 +82,12 @@ class ViewController: UIViewController {
     guard playedIdx < correctAnswers.count else {
       playedIdx = 0
       enableAllBtns(true)
+// 여기
+//      runTimePorgressBar(seconds: 0)
+      hiddenTimePorgressBar(false)
+      UIView.animate(withDuration: 10, animations: { () -> Void in
+        self.timePorgressBar.setProgress(0.0, animated: true)
+      })
       return
     }
 
@@ -107,20 +114,6 @@ class ViewController: UIViewController {
     )
   }
 
-//  func runTimer() {
-//    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(ViewController.timeLimit)), userInfo: nil, repeats: true)
-//  }
-//
-//  @objc func timeLimit() {
-////    timeProgressBar.setProgress(Float(remainingSeconds)/100.0, animated: true)
-//    if remainingSeconds != 0 {
-//      remainingSeconds -= 1
-//    } else {
-//      timer.invalidate()
-//      endGame()
-//    }
-//  }
-
   @IBAction func btnDown(_ sender: UIButton) {
     let guess = answerFromBtn(sender)
     self.playSound(soundName: "sound\(guess)")
@@ -136,6 +129,15 @@ class ViewController: UIViewController {
       inputIdx += 1
       if userInputs.count == correctAnswers.count {
         nextStage()
+
+        //여기
+//        timer.invalidate()
+        hiddenTimePorgressBar(true)
+//        runTimePorgressBar(seconds: 10)
+        UIView.animate(withDuration: 0, animations: { () -> Void in
+          self.timePorgressBar.setProgress(1.0, animated: true)
+        })
+
       }
     } else {
       endGame()
@@ -193,5 +195,35 @@ class ViewController: UIViewController {
     btn1.isEnabled = enabled
     btn2.isEnabled = enabled
     btn3.isEnabled = enabled
+  }
+
+  func startCountDownInputTimeLimit() {
+    runTimer()
+    updateTime()
+    hiddenTimePorgressBar(false)
+//    runTimePorgressBar()
+  }
+
+  func runTimer() {
+    timer = Timer.scheduledTimer(timeInterval: inputTimeLimit, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
+  }
+
+  @objc func updateTime() {
+    if inputTimeLimit != 0 {
+      inputTimeLimit -= 1
+    } else {
+      timer.invalidate()
+      endGame()
+    }
+  }
+
+  func runTimePorgressBar() {
+    UIView.animate(withDuration: 10, animations: { () -> Void in
+      self.timePorgressBar.setProgress(0.0, animated: true)
+    })
+  }
+
+  func hiddenTimePorgressBar(_ hidden: Bool) {
+    timePorgressBar.isHidden = hidden
   }
 }
