@@ -35,6 +35,9 @@ class ViewController: UIViewController {
     }
   }
 
+  var isCorrectAnswer: Bool {
+    return userInputs == correctAnswers
+  }
   var ProgressBarWidthSize: CGFloat = 0.0
   var timeLimit: Double = 8
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
@@ -131,7 +134,7 @@ class ViewController: UIViewController {
 
     if guess == correctAnswers[inputIdx] {
       inputIdx += 1
-      if userInputs.count == correctAnswers.count {
+      if isCorrectAnswer {
         nextStage()
       }
     } else {
@@ -142,6 +145,7 @@ class ViewController: UIViewController {
   }
 
   func endGame() {
+    resetProgressBar()
     enableAllBtns(false)
     playSound(soundName: "gameOver")
     timeLimit = 8
@@ -197,11 +201,10 @@ class ViewController: UIViewController {
                     var progressBarFrountViewWidth = self.progressBarFrontView.frame
                     progressBarFrountViewWidth.size.width = 0
                     self.progressBarFrontView.frame = progressBarFrountViewWidth
-    }) { _ in
-      // 애니메이션이 1. 정상종료 또는 2. 취소 되었을 때 호출됨
-      // 애니메이션이 1. 정상종료 될 때, 호출 되면서 endGame의 사운드도 함께 나옴.
-      self.endGame()
-      print("time up, end game")
+    }) { finished in
+      if finished {
+        self.endGame()
+      }
     }
   }
 
