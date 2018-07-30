@@ -8,7 +8,9 @@ let kHighScoreKey = "HighScore"
 class ViewController: UIViewController {
 
   @IBOutlet weak var highScoreLabel: UILabel!
-  @IBOutlet weak var timePorgressBar: UIProgressView!
+
+  @IBOutlet weak var progressBarBackView: UIView!
+  @IBOutlet weak var progressBarFrontView: UIView!
 
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
@@ -34,19 +36,24 @@ class ViewController: UIViewController {
   }
 
   var timer = Timer()
-  var totalTimeLimit: Float = 0
-  var remainingTime: Float = 0 {
-    didSet {
-      let progress = remainingTime / totalTimeLimit
-      timePorgressBar.setProgress(progress, animated: true)
-    }
-  }
+  var ProgressBarWidthSize: CGFloat = 0.0
+//  var totalTimeLimit: Float = 0
+//  var remainingTime: Float = 0 {
+//    didSet {
+//      let progress = remainingTime / totalTimeLimit
+//        timePorgressBar.setProgress(progress, animated: true)
+//    }
+//  }
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     highScoreLabel.text = "High score: \(highScore)"
     enableAllBtns(false)
+
+    ProgressBarWidthSize = progressBarFrontView.frame.size.width
+    progressBarBackView.layer.cornerRadius = 5
+    progressBarFrontView.layer.cornerRadius = 5
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
@@ -75,7 +82,8 @@ class ViewController: UIViewController {
       self.stage += 1
       self.startBtn.setTitle("\(self.stage)", for: .normal)
       self.playSound(soundName: "upNextStage")
-      self.resetTimer()
+//      self.resetTimer()
+      self.resetProgressBar()
     }
 
     playedIdx = 0
@@ -89,7 +97,8 @@ class ViewController: UIViewController {
     guard playedIdx < correctAnswers.count else {
       playedIdx = 0
       enableAllBtns(true)
-      runTimer()
+//      runTimer()
+      runProgressBar()
       return
     }
 
@@ -142,7 +151,7 @@ class ViewController: UIViewController {
   func endGame() {
     enableAllBtns(false)
     playSound(soundName: "gameOver")
-    stopTimer()
+//    stopTimer()
 
     let finalScore = stage - 1
     let highestScore = finalScore > highScore ? finalScore : highScore
@@ -183,34 +192,55 @@ class ViewController: UIViewController {
     }
   }
 
-  func enableAllBtns(_ enabled: Bool) {
+  func enableAllBtns(_ enabled: Bool) { // isUserInteractionEnabled ???
     btn0.isEnabled = enabled
     btn1.isEnabled = enabled
     btn2.isEnabled = enabled
     btn3.isEnabled = enabled
   }
 
-  func resetTimer() {
-    timer.invalidate()
-    totalTimeLimit = Float(stage) + 3
-    remainingTime = totalTimeLimit
-  }
-
-  func runTimer() {
-    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
-  }
-
-  func stopTimer() {
-    timer.invalidate()
-  }
-
-  @objc func updateTime() {
-    if remainingTime > 0 {
-      remainingTime -= 1
-      if remainingTime == 0 {
-        endGame()
-      }
+  func runProgressBar() {
+    UIView.animate(withDuration: 10,
+                   animations: {
+                    var progressBarFrountViewWidth = self.progressBarFrontView.frame
+                    progressBarFrountViewWidth.size.width = 0
+                    self.progressBarFrontView.frame = progressBarFrountViewWidth
+    }) { _ in
+       // 애니메이션이 1. 정상종료 또는 2. 취소 되었을 때 호출됨
+//      self.endGame()
+      print("time up, end game")
     }
   }
+
+  func resetProgressBar() {
+    progressBarFrontView.layer.removeAllAnimations()
+
+    var progressBarFrountViewWidth = self.progressBarFrontView.frame
+    progressBarFrountViewWidth.size.width = ProgressBarWidthSize
+    self.progressBarFrontView.frame = progressBarFrountViewWidth
+  }
+
+//  func resetTimer() {
+//    timer.invalidate()
+//    totalTimeLimit = Float(stage) + 3
+//    remainingTime = totalTimeLimit
+//  }
+//
+//  func runTimer() {
+//    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
+//  }
+//
+//  func stopTimer() {
+//    timer.invalidate()
+//  }
+//
+//  @objc func updateTime() {
+//    if remainingTime > 0 {
+//      remainingTime -= 1
+//      if remainingTime == 0 {
+//        endGame()
+//      }
+//    }
+//  }
 
 }

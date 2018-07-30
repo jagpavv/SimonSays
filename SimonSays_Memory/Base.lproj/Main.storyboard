@@ -103,12 +103,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="cq6-PN-qdd">
-                                <rect key="frame" x="59" y="280" width="198" height="2"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="72g-59-cV4" userLabel="progressBarBackView">
+                                <rect key="frame" x="38" y="290" width="300" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="progressTintColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="trackTintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-41-FiJ" userLabel="progressBar">
+                                        <rect key="frame" x="6" y="5" width="290" height="10"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -127,8 +133,9 @@
                         <outlet property="btn2" destination="Y1o-dI-jpr" id="NtA-xi-hlj"/>
                         <outlet property="btn3" destination="dT5-Le-ety" id="8yV-Ut-obY"/>
                         <outlet property="highScoreLabel" destination="TMG-21-cXy" id="Rdi-iu-g8p"/>
+                        <outlet property="progressBarBackView" destination="72g-59-cV4" id="B20-aM-XzB"/>
+                        <outlet property="progressBarFrontView" destination="d6E-41-FiJ" id="SPq-Se-2HS"/>
                         <outlet property="startBtn" destination="WoQ-9p-EaD" id="x2I-8I-HAh"/>
-                        <outlet property="timePorgressBar" destination="cq6-PN-qdd" id="Dua-Sn-fZp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
