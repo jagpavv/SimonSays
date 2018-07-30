@@ -35,15 +35,8 @@ class ViewController: UIViewController {
     }
   }
 
-  var timer = Timer()
   var ProgressBarWidthSize: CGFloat = 0.0
-//  var totalTimeLimit: Float = 0
-//  var remainingTime: Float = 0 {
-//    didSet {
-//      let progress = remainingTime / totalTimeLimit
-//        timePorgressBar.setProgress(progress, animated: true)
-//    }
-//  }
+  var timeLimit: Double = 8
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 
   override func viewDidLoad() {
@@ -80,9 +73,10 @@ class ViewController: UIViewController {
 
     DispatchQueue.main.asyncAfter(deadline: .now() + kDelayBetweenStages) {
       self.stage += 1
+      self.timeLimit += 1.5
+      print("timeLimit: \(self.timeLimit)")
       self.startBtn.setTitle("\(self.stage)", for: .normal)
       self.playSound(soundName: "upNextStage")
-//      self.resetTimer()
       self.resetProgressBar()
     }
 
@@ -97,8 +91,7 @@ class ViewController: UIViewController {
     guard playedIdx < correctAnswers.count else {
       playedIdx = 0
       enableAllBtns(true)
-//      runTimer()
-      runProgressBar()
+      runProgressBar(during: timeLimit)
       return
     }
 
@@ -151,8 +144,7 @@ class ViewController: UIViewController {
   func endGame() {
     enableAllBtns(false)
     playSound(soundName: "gameOver")
-//    stopTimer()
-
+    timeLimit = 8
     let finalScore = stage - 1
     let highestScore = finalScore > highScore ? finalScore : highScore
     highScore = highestScore
@@ -199,15 +191,16 @@ class ViewController: UIViewController {
     btn3.isEnabled = enabled
   }
 
-  func runProgressBar() {
-    UIView.animate(withDuration: 10,
+  func runProgressBar(during: Double) {
+    UIView.animate(withDuration: during,
                    animations: {
                     var progressBarFrountViewWidth = self.progressBarFrontView.frame
                     progressBarFrountViewWidth.size.width = 0
                     self.progressBarFrontView.frame = progressBarFrountViewWidth
     }) { _ in
-       // 애니메이션이 1. 정상종료 또는 2. 취소 되었을 때 호출됨
-//      self.endGame()
+      // 애니메이션이 1. 정상종료 또는 2. 취소 되었을 때 호출됨
+      // 애니메이션이 1. 정상종료 될 때, 호출 되면서 endGame의 사운드도 함께 나옴.
+      self.endGame()
       print("time up, end game")
     }
   }
@@ -220,27 +213,5 @@ class ViewController: UIViewController {
     self.progressBarFrontView.frame = progressBarFrountViewWidth
   }
 
-//  func resetTimer() {
-//    timer.invalidate()
-//    totalTimeLimit = Float(stage) + 3
-//    remainingTime = totalTimeLimit
-//  }
-//
-//  func runTimer() {
-//    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(ViewController.updateTime)), userInfo: nil, repeats: true)
-//  }
-//
-//  func stopTimer() {
-//    timer.invalidate()
-//  }
-//
-//  @objc func updateTime() {
-//    if remainingTime > 0 {
-//      remainingTime -= 1
-//      if remainingTime == 0 {
-//        endGame()
-//      }
-//    }
-//  }
 
 }
