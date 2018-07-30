@@ -38,7 +38,7 @@ class ViewController: UIViewController {
   var isCorrectAnswer: Bool {
     return userInputs == correctAnswers
   }
-  var ProgressBarWidthSize: CGFloat = 0.0
+  var progressBarWidth: CGFloat = 0.0
   var timeLimit: Double = 8
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
 
@@ -47,9 +47,25 @@ class ViewController: UIViewController {
     highScoreLabel.text = "High score: \(highScore)"
     enableAllBtns(false)
 
-    ProgressBarWidthSize = progressBarFrontView.frame.size.width
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
     progressBarBackView.layer.cornerRadius = 5
     progressBarFrontView.layer.cornerRadius = 5
+    startBtn.layer.cornerRadius = startBtn.frame.width / 2
+
+    progressBarWidth = progressBarFrontView.frame.width
+
+//    let crWidth = btn0.frame.width * 2
+//    let path = UIBezierPath(roundedRect: btn0.bounds,
+//                            byRoundingCorners:[.topLeft],
+//                            cornerRadii: CGSize(width: crWidth, height: crWidth))
+//    let maskLayer = CAShapeLayer()
+//    maskLayer.path = path.cgPath
+//    btn0.layer.mask = maskLayer
+
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
@@ -70,6 +86,7 @@ class ViewController: UIViewController {
   }
 
   func nextStage() {
+    resetProgressBar()
     clearUserInputs()
     correctAnswers.append(Int(arc4random_uniform(4)))
     print("correctAnswer \(correctAnswers)")
@@ -80,7 +97,6 @@ class ViewController: UIViewController {
       print("timeLimit: \(self.timeLimit)")
       self.startBtn.setTitle("\(self.stage)", for: .normal)
       self.playSound(soundName: "upNextStage")
-      self.resetProgressBar()
     }
 
     playedIdx = 0
@@ -198,9 +214,7 @@ class ViewController: UIViewController {
   func runProgressBar(during: Double) {
     UIView.animate(withDuration: during,
                    animations: {
-                    var progressBarFrountViewWidth = self.progressBarFrontView.frame
-                    progressBarFrountViewWidth.size.width = 0
-                    self.progressBarFrontView.frame = progressBarFrountViewWidth
+                    self.changeWidthOfProgressBar(0)
     }) { finished in
       if finished {
         self.endGame()
@@ -210,11 +224,13 @@ class ViewController: UIViewController {
 
   func resetProgressBar() {
     progressBarFrontView.layer.removeAllAnimations()
-
-    var progressBarFrountViewWidth = self.progressBarFrontView.frame
-    progressBarFrountViewWidth.size.width = ProgressBarWidthSize
-    self.progressBarFrontView.frame = progressBarFrountViewWidth
+    changeWidthOfProgressBar(progressBarWidth)
   }
 
+  func changeWidthOfProgressBar(_ width: CGFloat) {
+    var f = self.progressBarFrontView.frame
+    f.size.width = width
+    self.progressBarFrontView.frame = f
+  }
 
 }

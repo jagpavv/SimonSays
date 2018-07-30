@@ -103,17 +103,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="72g-59-cV4" userLabel="progressBarBackView">
-                                <rect key="frame" x="38" y="290" width="300" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72g-59-cV4" userLabel="progressBarBackView">
+                                <rect key="frame" x="38" y="318" width="300" height="20"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-41-FiJ" userLabel="progressBar">
-                                        <rect key="frame" x="6" y="5" width="290" height="10"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-41-FiJ" userLabel="progressBar">
+                                        <rect key="frame" x="5" y="5" width="290" height="10"/>
                                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="d6E-41-FiJ" secondAttribute="trailing" constant="5" id="17K-PU-8Ah"/>
+                                    <constraint firstItem="d6E-41-FiJ" firstAttribute="centerY" secondItem="72g-59-cV4" secondAttribute="centerY" id="S4t-Vs-jgh"/>
+                                    <constraint firstItem="d6E-41-FiJ" firstAttribute="leading" secondItem="72g-59-cV4" secondAttribute="leading" constant="5" id="cTu-e3-wIj"/>
+                                    <constraint firstItem="d6E-41-FiJ" firstAttribute="top" secondItem="72g-59-cV4" secondAttribute="top" constant="5" id="iD2-b9-m06"/>
+                                    <constraint firstAttribute="height" constant="20" id="jLy-dq-RIz"/>
+                                    <constraint firstAttribute="bottom" secondItem="d6E-41-FiJ" secondAttribute="bottom" constant="5" id="z6B-2C-Qro"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -122,8 +128,11 @@
                             <constraint firstItem="VTf-ra-znP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="8:10" id="KA8-wg-cNJ"/>
                             <constraint firstItem="TMG-21-cXy" firstAttribute="centerY" secondItem="VTf-ra-znP" secondAttribute="firstBaseline" multiplier="1:2" id="MGF-H7-hR4"/>
                             <constraint firstItem="TMG-21-cXy" firstAttribute="width" secondItem="VTf-ra-znP" secondAttribute="width" id="XWE-Wr-aQ1"/>
+                            <constraint firstItem="VTf-ra-znP" firstAttribute="top" secondItem="72g-59-cV4" secondAttribute="bottom" constant="40" id="c43-xm-cJQ"/>
+                            <constraint firstItem="72g-59-cV4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="f6f-I5-lEf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VTf-ra-znP" secondAttribute="bottom" constant="100" id="g9f-N8-vei"/>
                             <constraint firstItem="TMG-21-cXy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="rUx-Pr-ZKa"/>
+                            <constraint firstItem="72g-59-cV4" firstAttribute="width" secondItem="VTf-ra-znP" secondAttribute="width" id="sCH-yq-uz6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
