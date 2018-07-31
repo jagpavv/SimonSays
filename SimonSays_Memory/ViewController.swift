@@ -9,6 +9,9 @@ class ViewController: UIViewController {
 
   @IBOutlet weak var highScoreLabel: UILabel!
 
+  @IBOutlet weak var progressBarBackView: UIView!
+  @IBOutlet weak var progressBarFrontView: UIView!
+
   @IBOutlet weak var btn0: UIButton!
   @IBOutlet weak var btn1: UIButton!
   @IBOutlet weak var btn2: UIButton!
@@ -32,14 +35,37 @@ class ViewController: UIViewController {
     }
   }
 
+  var isCorrectAnswer: Bool {
+    return userInputs == correctAnswers
+  }
+  var progressBarWidth: CGFloat = 0.0
+  var timeLimit: Double = 8
   var audioPlayer: AVAudioPlayer = AVAudioPlayer()
-//  var timer = Timer()
-//  var remainingSeconds: Float = 10
 
   override func viewDidLoad() {
     super.viewDidLoad()
     highScoreLabel.text = "High score: \(highScore)"
     enableAllBtns(false)
+
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    progressBarBackView.layer.cornerRadius = 5
+    progressBarFrontView.layer.cornerRadius = 5
+    startBtn.layer.cornerRadius = startBtn.frame.width / 2
+
+    progressBarWidth = progressBarFrontView.frame.width
+
+//    let crWidth = btn0.frame.width * 2
+//    let path = UIBezierPath(roundedRect: btn0.bounds,
+//                            byRoundingCorners:[.topLeft],
+//                            cornerRadii: CGSize(width: crWidth, height: crWidth))
+//    let maskLayer = CAShapeLayer()
+//    maskLayer.path = path.cgPath
+//    btn0.layer.mask = maskLayer
+
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
@@ -60,12 +86,15 @@ class ViewController: UIViewController {
   }
 
   func nextStage() {
+    resetProgressBar()
     clearUserInputs()
     correctAnswers.append(Int(arc4random_uniform(4)))
     print("correctAnswer \(correctAnswers)")
 
     DispatchQueue.main.asyncAfter(deadline: .now() + kDelayBetweenStages) {
       self.stage += 1
+      self.timeLimit += 1.5
+      print("timeLimit: \(self.timeLimit)")
       self.startBtn.setTitle("\(self.stage)", for: .normal)
       self.playSound(soundName: "upNextStage")
     }
@@ -81,6 +110,7 @@ class ViewController: UIViewController {
     guard playedIdx < correctAnswers.count else {
       playedIdx = 0
       enableAllBtns(true)
+      runProgressBar(during: timeLimit)
       return
     }
 
@@ -107,20 +137,6 @@ class ViewController: UIViewController {
     )
   }
 
-//  func runTimer() {
-//    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: (#selector(ViewController.timeLimit)), userInfo: nil, repeats: true)
-//  }
-//
-//  @objc func timeLimit() {
-////    timeProgressBar.setProgress(Float(remainingSeconds)/100.0, animated: true)
-//    if remainingSeconds != 0 {
-//      remainingSeconds -= 1
-//    } else {
-//      timer.invalidate()
-//      endGame()
-//    }
-//  }
-
   @IBAction func btnDown(_ sender: UIButton) {
     let guess = answerFromBtn(sender)
     self.playSound(soundName: "sound\(guess)")
@@ -134,7 +150,7 @@ class ViewController: UIViewController {
 
     if guess == correctAnswers[inputIdx] {
       inputIdx += 1
-      if userInputs.count == correctAnswers.count {
+      if isCorrectAnswer {
         nextStage()
       }
     } else {
@@ -145,10 +161,10 @@ class ViewController: UIViewController {
   }
 
   func endGame() {
+    resetProgressBar()
     enableAllBtns(false)
     playSound(soundName: "gameOver")
-    // timer.invalidate()
-
+    timeLimit = 8
     let finalScore = stage - 1
     let highestScore = finalScore > highScore ? finalScore : highScore
     highScore = highestScore
@@ -188,10 +204,33 @@ class ViewController: UIViewController {
     }
   }
 
-  func enableAllBtns(_ enabled: Bool) {
+  func enableAllBtns(_ enabled: Bool) { // isUserInteractionEnabled ???
     btn0.isEnabled = enabled
     btn1.isEnabled = enabled
     btn2.isEnabled = enabled
     btn3.isEnabled = enabled
   }
+
+  func runProgressBar(during: Double) {
+    UIView.animate(withDuration: during,
+                   animations: {
+                    self.changeWidthOfProgressBar(0)
+    }) { finished in
+      if finished {
+        self.endGame()
+      }
+    }
+  }
+
+  func resetProgressBar() {
+    progressBarFrontView.layer.removeAllAnimations()
+    changeWidthOfProgressBar(progressBarWidth)
+  }
+
+  func changeWidthOfProgressBar(_ width: CGFloat) {
+    var f = self.progressBarFrontView.frame
+    f.size.width = width
+    self.progressBarFrontView.frame = f
+  }
+
 }
