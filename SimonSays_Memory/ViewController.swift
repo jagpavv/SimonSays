@@ -217,8 +217,11 @@ class ViewController: UIViewController {
 
   func runProgressBar(during: Double) {
     UIView.animate(withDuration: during,
+                   delay: 0,
+                   options: .curveLinear,
                    animations: {
                     self.changeWidthOfProgressBar(0)
+                    self.progressBarFrontView.backgroundColor = UIColor.red
     }) { finished in
       if finished {
         self.endGame()
@@ -228,13 +231,14 @@ class ViewController: UIViewController {
 
   func resetProgressBar() {
     progressBarFrontView.layer.removeAllAnimations()
+    self.progressBarFrontView.backgroundColor = UIColor.blue
     changeWidthOfProgressBar(progressBarWidth)
   }
 
   func changeWidthOfProgressBar(_ width: CGFloat) {
-    var f = self.progressBarFrontView.frame
+    var f = progressBarFrontView.frame
     f.size.width = width
-    self.progressBarFrontView.frame = f
+    progressBarFrontView.frame = f
   }
 
 }
