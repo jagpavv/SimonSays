@@ -46,7 +46,6 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     highScoreLabel.text = "High score: \(highScore)"
     enableAllBtns(false)
-
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +68,7 @@ class ViewController: UIViewController {
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
+    enableStartBtn(false)
     newGame()
     nextStage()
   }
@@ -163,13 +163,13 @@ class ViewController: UIViewController {
   func endGame() {
     resetProgressBar()
     enableAllBtns(false)
+    enableStartBtn(true)
     playSound(soundName: "gameOver")
     timeLimit = 8
     let finalScore = stage - 1
     let highestScore = finalScore > highScore ? finalScore : highScore
     highScore = highestScore
     startBtn.setTitle("\(finalScore)", for: .normal)
-
     print("gameEnd")
   }
 
@@ -204,11 +204,15 @@ class ViewController: UIViewController {
     }
   }
 
-  func enableAllBtns(_ enabled: Bool) { // isUserInteractionEnabled ???
+  func enableAllBtns(_ enabled: Bool) {
     btn0.isEnabled = enabled
     btn1.isEnabled = enabled
     btn2.isEnabled = enabled
     btn3.isEnabled = enabled
+  }
+
+  func enableStartBtn(_ enabled: Bool) {
+    startBtn.isEnabled = enabled
   }
 
   func runProgressBar(during: Double) {
