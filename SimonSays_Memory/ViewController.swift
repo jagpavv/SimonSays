@@ -4,6 +4,7 @@ import AVFoundation
 let kDelayBetweenStages = 0.75
 let kPlayDuration = 0.4
 let kHighScoreKey = "HighScore"
+let kDarkModeKey = "DarkMode"
 
 class ViewController: UIViewController {
 
@@ -17,6 +18,8 @@ class ViewController: UIViewController {
   @IBOutlet weak var btn2: UIButton!
   @IBOutlet weak var btn3: UIButton!
   @IBOutlet weak var startBtn: UIButton!
+  @IBOutlet weak var btnWrapperView: UIView!
+  @IBOutlet weak var darkModeSwitch: UISwitch!
 
   let userDefault = UserDefaults.standard
   var correctAnswers: [Int] = []
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
     set {
       userDefault.set(newValue, forKey: kHighScoreKey)
       userDefault.synchronize()
-      highScoreLabel.text = "High score: \(newValue)"
+      highScoreLabel.text = "\(newValue)"
     }
   }
 
@@ -44,27 +47,32 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    highScoreLabel.text = "High score: \(highScore)"
+    highScoreLabel.text = "\(highScore)"
     enableAllBtns(false)
+
+    darkModeSwitch.setOn(userDefault.bool(forKey: kDarkModeKey), animated: false)
+    darkModeChanged(darkModeSwitch)
   }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    progressBarBackView.layer.cornerRadius = 5
-    progressBarFrontView.layer.cornerRadius = 5
-    startBtn.layer.cornerRadius = startBtn.frame.width / 2
+    for v in [progressBarFrontView, progressBarBackView, btnWrapperView, startBtn] {
+      guard let v = v else { return }
+      v.layer.cornerRadius = v.frame.height / 2
+    }
 
     progressBarWidth = progressBarFrontView.frame.width
+  }
 
-//    let crWidth = btn0.frame.width * 2
-//    let path = UIBezierPath(roundedRect: btn0.bounds,
-//                            byRoundingCorners:[.topLeft],
-//                            cornerRadii: CGSize(width: crWidth, height: crWidth))
-//    let maskLayer = CAShapeLayer()
-//    maskLayer.path = path.cgPath
-//    btn0.layer.mask = maskLayer
-
+  @IBAction func darkModeChanged(_ sender: UISwitch) {
+    UIView.animate(withDuration: 1) {
+      let color = sender.isOn ? UIColor.black : UIColor.white
+      self.view.backgroundColor = color
+      self.startBtn.backgroundColor = color
+    }
+    userDefault.set(sender.isOn, forKey: kDarkModeKey)
+    userDefault.synchronize()
   }
 
   @IBAction func startBtnTapped(_ sender: UIButton) {
@@ -221,7 +229,7 @@ class ViewController: UIViewController {
                    options: .curveLinear,
                    animations: {
                     self.changeWidthOfProgressBar(0)
-                    self.progressBarFrontView.backgroundColor = UIColor.red
+                    self.progressBarFrontView.backgroundColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
     }) { finished in
       if finished {
         self.endGame()
@@ -231,7 +239,7 @@ class ViewController: UIViewController {
 
   func resetProgressBar() {
     progressBarFrontView.layer.removeAllAnimations()
-    self.progressBarFrontView.backgroundColor = UIColor.blue
+    self.progressBarFrontView.backgroundColor = #colorLiteral(red: 0.476841867, green: 0.5048075914, blue: 1, alpha: 1)
     changeWidthOfProgressBar(progressBarWidth)
   }
 
