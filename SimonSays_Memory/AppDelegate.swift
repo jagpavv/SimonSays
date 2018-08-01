@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  SimonSays_Memory
-//
-//  Created by Eunjin on 7/5/18.
-//  Copyright © 2018 Two Berliners. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
