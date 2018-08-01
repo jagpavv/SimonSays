@@ -123,12 +123,14 @@
                                     <constraint firstAttribute="bottom" secondItem="d6E-41-FiJ" secondAttribute="bottom" constant="5" id="z6B-2C-Qro"/>
                                 </constraints>
                             </view>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tU9-60-8O2">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tU9-60-8O2">
                                 <rect key="frame" x="289" y="44" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="IWr-ay-dDR"/>
                                     <constraint firstAttribute="width" constant="49" id="uWL-Cj-nlo"/>
                                 </constraints>
+                                <color key="onTintColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="thumbTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="darkModeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="IgH-SJ-dig"/>
                                 </connections>
