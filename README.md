@@ -1,8 +1,12 @@
 
 <img src="https://user-images.githubusercontent.com/33220970/49690419-0fb09480-fb31-11e8-800b-feddee337159.png" width="200">
+
+
 # One 4th
-It's my first application wirtten in Swift.
 Like simon says, simple memory game.
+
+It's my first application wirtten in Swift.
+
 You can choose wihte mood or black mood.
 
 It's on the App Store.
