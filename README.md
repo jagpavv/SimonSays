@@ -1,6 +1,6 @@
 # One 4th
 
-Simple memory game
+Simple memory game. Like simon says.
 
 It's on the App Store.
 
