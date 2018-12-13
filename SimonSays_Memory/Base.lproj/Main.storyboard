@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +22,7 @@
                                 <rect key="frame" x="37.666666666666657" y="378" width="300" height="300"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hw-cW-JLR">
-                                        <rect key="frame" x="0.6666666666666714" y="0.0" width="150.66666666666663" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                         <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="L7L-Vb-O7n"/>
@@ -33,7 +30,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLF-9U-vOG">
-                                        <rect key="frame" x="0.6666666666666714" y="150" width="150.66666666666663" height="149.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="150" width="150" height="150"/>
                                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="0.68650968309859151" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="WSR-7H-d6f"/>
@@ -41,7 +38,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1o-dI-jpr">
-                                        <rect key="frame" x="150.33333333333331" y="0.0" width="149.33333333333331" height="150"/>
+                                        <rect key="frame" x="150" y="0.0" width="150" height="150"/>
                                         <color key="backgroundColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="DEO-bD-ERL"/>
@@ -49,7 +46,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-Le-ety">
-                                        <rect key="frame" x="150.33333333333331" y="150" width="149.33333333333331" height="149.66666666666663"/>
+                                        <rect key="frame" x="150" y="150" width="150" height="150"/>
                                         <color key="backgroundColor" red="0.84465640779999995" green="0.51457053419999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="btnDown:" destination="BYZ-38-t0r" eventType="touchDown" id="axg-L6-9pG"/>
@@ -57,7 +54,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WoQ-9p-EaD">
-                                        <rect key="frame" x="92.666666666666686" y="92.666666666666686" width="115.33333333333331" height="115.33333333333331"/>
+                                        <rect key="frame" x="92" y="92.333333333333314" width="115.66666666666669" height="115.33333333333331"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="55"/>
                                         <state key="normal" title="Go">
@@ -94,19 +91,19 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-21-cXy">
-                                <rect key="frame" x="37.666666666666657" y="153.66666666666666" width="300" height="71.666666666666657"/>
+                                <rect key="frame" x="37.666666666666657" y="153.33333333333334" width="300" height="71.666666666666657"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="60"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XqS-fs-Fc2">
-                                <rect key="frame" x="37" y="116.66666666666669" width="300" height="37"/>
+                                <rect key="frame" x="37.666666666666657" y="116.33333333333331" width="300" height="37"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="31"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72g-59-cV4" userLabel="progressBarBackView">
-                                <rect key="frame" x="38" y="318" width="300" height="20"/>
+                                <rect key="frame" x="37.666666666666657" y="318" width="300" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6E-41-FiJ" userLabel="progressBar">
                                         <rect key="frame" x="5" y="5" width="290" height="10"/>
@@ -124,7 +121,7 @@
                                 </constraints>
                             </view>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tU9-60-8O2">
-                                <rect key="frame" x="289" y="44" width="51" height="31"/>
+                                <rect key="frame" x="288.66666666666669" y="44" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="IWr-ay-dDR"/>
                                     <constraint firstAttribute="width" constant="49" id="uWL-Cj-nlo"/>
