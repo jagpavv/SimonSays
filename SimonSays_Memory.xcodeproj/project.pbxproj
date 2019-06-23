@@ -8,24 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		AC0FE7FF20EE49220088A20A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0FE7FE20EE49220088A20A /* AppDelegate.swift */; };
-		AC0FE80120EE49220088A20A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0FE80020EE49220088A20A /* ViewController.swift */; };
+		AC0FE80120EE49220088A20A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0FE80020EE49220088A20A /* GameViewController.swift */; };
 		AC0FE80420EE49220088A20A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE80220EE49220088A20A /* Main.storyboard */; };
 		AC0FE80620EE49240088A20A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE80520EE49240088A20A /* Assets.xcassets */; };
 		AC0FE80920EE49240088A20A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE80720EE49240088A20A /* LaunchScreen.storyboard */; };
 		AC0FE82B20EE5ECF0088A20A /* audio in Resources */ = {isa = PBXBuildFile; fileRef = AC0FE82A20EE5ECF0088A20A /* audio */; };
 		AC36333620FFA7D0007E4748 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC36333520FFA7D0007E4748 /* AVFoundation.framework */; };
+		ACEF233922BE56F00004A0E5 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF233822BE56F00004A0E5 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AC0FE7FB20EE49220088A20A /* SimonSays_Memory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimonSays_Memory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0FE7FE20EE49220088A20A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AC0FE80020EE49220088A20A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		AC0FE80020EE49220088A20A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		AC0FE80320EE49220088A20A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC0FE80520EE49240088A20A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC0FE80820EE49240088A20A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC0FE80A20EE49240088A20A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC0FE82A20EE5ECF0088A20A /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		AC36333520FFA7D0007E4748 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		ACEF233822BE56F00004A0E5 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +62,9 @@
 		AC0FE7FD20EE49220088A20A /* SimonSays_Memory */ = {
 			isa = PBXGroup;
 			children = (
+				ACEF233722BE56D40004A0E5 /* Views */,
+				ACEF233622BE56C60004A0E5 /* ViewModels */,
 				AC0FE7FE20EE49220088A20A /* AppDelegate.swift */,
-				AC0FE80020EE49220088A20A /* ViewController.swift */,
 				AC0FE80220EE49220088A20A /* Main.storyboard */,
 				AC0FE80520EE49240088A20A /* Assets.xcassets */,
 				AC0FE82A20EE5ECF0088A20A /* audio */,
@@ -77,6 +80,22 @@
 				AC36333520FFA7D0007E4748 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ACEF233622BE56C60004A0E5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ACEF233822BE56F00004A0E5 /* GameViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ACEF233722BE56D40004A0E5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AC0FE80020EE49220088A20A /* GameViewController.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -111,6 +130,7 @@
 				TargetAttributes = {
 					AC0FE7FA20EE49220088A20A = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -151,7 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC0FE80120EE49220088A20A /* ViewController.swift in Sources */,
+				ACEF233922BE56F00004A0E5 /* GameViewModel.swift in Sources */,
+				AC0FE80120EE49220088A20A /* GameViewController.swift in Sources */,
 				AC0FE7FF20EE49220088A20A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +329,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3b2d1453-7710-4618-8fc9-8ef53e6da871";
 				PROVISIONING_PROFILE_SPECIFIER = XC_Wildcard;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -330,7 +351,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "69b9816b-9ba5-4268-8492-1995007fde16";
 				PROVISIONING_PROFILE_SPECIFIER = One4thDistProfile;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
